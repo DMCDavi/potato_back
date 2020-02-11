@@ -4,11 +4,12 @@ const User = use("App/Models/User");
 
 class SessionController {
   async store({ request, response, auth }) {
+    /*
     const isLoggedIn = await auth.check();
     if (isLoggedIn) {
       await auth.logout();
     }
-
+    */
     const { email, password } = request.all();
 
     try {
