@@ -18,7 +18,7 @@ class SessionController {
       console.log(error);
       return response
         .status(400)
-        .json({ message: "Não foi possível efetuar o login, trouxa" });
+        .json({ message: "Não foi possível efetuar o login, trouxa demais" });
     }
   }
 
