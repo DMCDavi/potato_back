@@ -1,17 +1,21 @@
 "use strict";
 
 const User = use("App/Models/User");
-const PushToken = use("App/Models/PushToken");
 
 class SessionController {
   async store({ request, response, auth }) {
+    const isLoggedIn = await auth.check();
+    if (isLoggedIn) {
+      await auth.logout();
+    }
+
     const { email, password } = request.all();
 
     try {
-    const token = await auth.attempt(email, password)
-
-    return token
+      const user = await auth.attempt(email, password);
+      return JSON.stringify(user);
     } catch (error) {
+      console.log(error);
       return response
         .status(400)
         .json({ message: "Não foi possível efetuar o login, trouxa demais" });
@@ -27,12 +31,6 @@ class SessionController {
 
     await user.save();
     return response.status(202).json({ message: "Atualizou, Davi é gado" });
-  }
-
-  async pushtoken({ request, auth }) {
-    const { token, username } = request.only(["token", "username"]);
-    const token_f = await PushToken.create([token, username]);
-    return token_f;
   }
 
   async index({ response }) {
