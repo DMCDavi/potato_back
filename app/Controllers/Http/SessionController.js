@@ -5,12 +5,12 @@ const PushToken = use("App/Models/PushToken");
 
 class SessionController {
   async store({ request, response, auth }) {
-    const { email, password } = request.only(["email", "password"]);
+    const { email, password } = request.all();
 
     try {
-      const { token } = await auth.attempt(email, password);
-      const { id } = await User.findByOrFail("email", email);
-      return { token, id };
+    const token = await auth.attempt(email, password)
+
+    return token
     } catch (error) {
       return response
         .status(400)
