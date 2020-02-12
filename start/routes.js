@@ -20,5 +20,5 @@ Route.on("/").render("welcome");
 
 Route.post("/register", "RegisterController.store");
 Route.post("/sessions", "SessionController.store");
-Route.put("/decrease/:id", "SessionController.decreaseScore");
+Route.put("/espertinho/:id", "SessionController.decreaseScore");
 Route.get("/users", "SessionController.index");
