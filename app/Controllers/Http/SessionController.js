@@ -13,9 +13,8 @@ class SessionController {
     const { email, password } = request.all();
 
     try {
-      const { token } = await auth.attempt(email, password);
-      const { id } = await User.findByOrFail("email", email);
-      return { token, id };
+      const user = await auth.attempt(email, password);
+      return JSON.stringify(user);
     } catch (error) {
       console.log(error);
       return response
