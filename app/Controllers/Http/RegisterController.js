@@ -18,7 +18,7 @@ class RegisterController {
 
     const user = await User.create({
       ...data,
-      score: 33
+      score: 61
     });
 
     response.status(201);
